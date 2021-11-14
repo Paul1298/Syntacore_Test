@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "Accumulation.h"
 #include <complex>
+#include "Accumulation.h"
 
 // todo ask Andrew about sample_num
 int main(/*int argc, char *argv[]*/) {

@@ -6,11 +6,11 @@ void Accumulation::push(const complex16 &value) {
     queue<complex16 >::push(value);
     sum += value;
 
-    if (this->size() == this->sample_num) {
+    if (size() == sample_num) {
         isAverageReady = true;
-    } else if (this->size() > this->sample_num) {
-        sum -= this->front();
-        this->c.pop_front();
+    } else if (size() > sample_num) {
+        sum -= front();
+        c.pop_front();
     }
 }
 
