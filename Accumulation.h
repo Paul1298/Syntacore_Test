@@ -15,7 +15,7 @@ using complex16 = std::complex<int16_t>;
  * @sum Sum of container values.
  * @isAverageReady Average ready flag.
  */
-class Accumulation : public std::queue<complex16> {
+class Accumulation : private std::queue<complex16> {
 public:
     explicit Accumulation(int32_t sample_num);
 
@@ -23,10 +23,12 @@ public:
 
     complex16 getAverage() const;
 
+    bool isAverageReady() { return isReady; };
+
 private:
     int32_t sample_num;
     std::complex<int32_t> sum = 0;
-    bool isAverageReady = false;
+    bool isReady = false;
 };
 
 
