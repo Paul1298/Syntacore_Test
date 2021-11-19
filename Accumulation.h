@@ -25,21 +25,19 @@ public:
 
     complex16 getAverage() const;
 
-    bool isAverageReady() const { return isReady; };
+    bool isAverageReady() const { return size() == capacity; };
 
     size_t size() const {
-        return (head > tail) ? (capacity - head + tail) : (tail - head);
+        return ((head > tail) ? (capacity + 1 - head + tail) : (tail - head));
     }
 
+    std::array<complex16, sampleNum> samples{};
 private:
-    std::array<complex16 , sampleNum> samples{};
-    size_t capacity;
+    int32_t capacity;
     size_t head = 0, tail = 0;
 
     std::complex<int32_t> sum = 0;
-    bool isReady = false;
 
-    complex16 pop();
 };
 
 

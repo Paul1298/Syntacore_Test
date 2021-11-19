@@ -10,14 +10,15 @@ int main(int argc, char *argv[]) {
     const char *output_filename = argv[2];
     std::ifstream output(output_filename);
 
-    Accumulation complexes;
+    Accumulation complexes(2);
 
     while (!feof(stdin)) {
         int16_t real, imag;
         std::cin >> imag >> real;
         complexes.push(complex16(imag, real)); // reversed
         if (complexes.isAverageReady()) {
-            std::string expected; std::getline(output, expected);
+            std::string expected;
+            std::getline(output, expected);
 
             std::stringstream buf;
             buf << complexes.getAverage();
@@ -29,7 +30,8 @@ int main(int argc, char *argv[]) {
             }
         }
     }
-    std::cout << "TestPassed";
+    if (output.eof()) std::cout << "TestPassed";
+    else std::cout << "TestFailed";
 
     fclose(stdin);
     return EXIT_SUCCESS;
