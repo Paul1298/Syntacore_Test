@@ -1,19 +1,25 @@
 #include "Accumulation.h"
 
-Accumulation::Accumulation(int32_t sample_num) : sample_num(sample_num) {}
 
 void Accumulation::push(const complex16 &value) {
-    queue<complex16>::push(value);
     sum += value;
 
-    if (size() == sample_num) {
+    if (size() == capacity) {
         isReady = true;
-    } else if (size() > sample_num) {
-        sum -= front();
-        c.pop_front();
+        samples[head] = value;
+        sum -= pop();
+    } else if (size() < capacity) {
+        samples[tail] = value;
+        tail = (tail + 1) % capacity;
     }
 }
 
+complex16 Accumulation::pop() {
+    complex16 x = samples[head];
+    head = (head + 1) % capacity;
+    return x;
+}
+
 complex16 Accumulation::getAverage() const {
-    return sum / sample_num;
+    return sum / sampleNum;
 }

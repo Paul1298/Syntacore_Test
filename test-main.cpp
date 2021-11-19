@@ -3,7 +3,6 @@
 #include <fstream>
 #include "Accumulation.h"
 
-// todo ask Andrew about sample_num
 int main(int argc, char *argv[]) {
     const char *input_filename = argv[1];
     freopen(input_filename, "r", stdin);
@@ -11,11 +10,7 @@ int main(int argc, char *argv[]) {
     const char *output_filename = argv[2];
     std::ifstream output(output_filename);
 
-    int32_t sample_num;
-    std::cin >> sample_num;
-
-    Accumulation complexes(sample_num);
-//    complexes.size();
+    Accumulation complexes;
 
     while (!feof(stdin)) {
         int16_t real, imag;
